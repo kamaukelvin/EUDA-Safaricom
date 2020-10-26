@@ -1,24 +1,82 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Switch, Redirect, Route, useHistory} from 'react-router-dom';
+import { createBrowserHistory } from "history";
+
+
+// css
+import 'antd/dist/antd.css'; 
+import './assets/assets/css/dashforge.css'
+import './assets/assets/css/dashforge.auth.css'
+import './assets/assets/css/dashforge.dashboard.css'
+
+// Layouts 
+import routes from './routes'
+import PublicLayout from './shared/layout/PublicLayout'
+import AuthLayout from './shared/layout/AuthLayout'
+
+// Public pages
+import Login from './pages/login/LoginWrapper'
+
+// Authenticated Pages
+import Dashboard from './pages/dashboard/DashboardWrapper'
+import Employee from './pages/employee/EmployeeWrapper'
+
+const pages =[
+  {
+    exact:true,
+    path: routes.login,
+    component: Login,
+    layout: PublicLayout,
+
+  },
+  {
+    exact:true,
+    path: routes.dashboard,
+    component: Dashboard,
+    layout: AuthLayout,
+
+  },
+  {
+    exact:true,
+    path: routes.employee,
+    component: Employee,
+    layout: AuthLayout,
+
+  },
+
+
+]
 
 function App() {
+
+  const history = useHistory()
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router history={history}>
+        <Switch>
+          {pages.map(
+            ({exact, path, component:Component, layout: Layout}, index)=>(
+              <Route
+              key={index}
+              exact={exact}
+              path={path}
+              render = {props =>(
+                <Layout history={props.history}>
+                  <Component {...props}/>
+                </Layout>
+              )}
+              />
+            )
+          )}
+          <Redirect to ={routes.login}/>
+          {/* OR */}
+          {/* custom 404 PAGE */}
+          {/* <Route component={NotFoundPage} />  */}
+            </Switch>
+            </Router>
     </div>
   );
 }
