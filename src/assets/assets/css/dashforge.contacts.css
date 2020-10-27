@@ -247,13 +247,13 @@
       transform: translateX(320px); } }
   @media (min-width: 992px) {
     .contact-content {
-      left: 325px;
+      left: 345px;
       transform: none;
       visibility: visible;
       opacity: 1; } }
   @media (min-width: 1200px) {
     .contact-content {
-      left: 340px; } }
+      left: 360px; } }
 
 .contact-content-header {
   background-color: #fff;

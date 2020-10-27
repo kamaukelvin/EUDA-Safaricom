@@ -10,6 +10,7 @@ import 'antd/dist/antd.css';
 import './assets/assets/css/dashforge.css'
 import './assets/assets/css/dashforge.auth.css'
 import './assets/assets/css/dashforge.dashboard.css'
+import './assets/assets/css/dashforge.contacts.css'
 
 // Layouts 
 import routes from './routes'
