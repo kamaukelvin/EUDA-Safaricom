@@ -33,6 +33,7 @@ const Employee = ({ accessories }) => {
           </div>
 
           <div className="content ht-100v pd-0">
+            
             <div className="content-body pd-0">
               <div className="contact-wrapper contact-wrapper-two">
                 <div className="contact-navleft">

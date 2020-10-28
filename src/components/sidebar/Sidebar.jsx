@@ -1,8 +1,8 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 import { Layout} from 'antd';
-import logo from '../../assets/assets/img/logo-saf.png'
-import ico from '../../assets/assets/img/ico.png'
+import logo from '../../assets/img/logo-saf.png'
+import ico from '../../assets/img/ico.png'
 import * as Icon from 'react-feather'
 
 const Sidebar = ({collapsed}) => {

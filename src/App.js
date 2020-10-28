@@ -2,15 +2,15 @@ import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Switch, Redirect, Route, useHistory} from 'react-router-dom';
-import { createBrowserHistory } from "history";
+
 
 
 // css
 import 'antd/dist/antd.css'; 
-import './assets/assets/css/dashforge.css'
-import './assets/assets/css/dashforge.auth.css'
-import './assets/assets/css/dashforge.dashboard.css'
-import './assets/assets/css/dashforge.contacts.css'
+import './assets/css/euda.css'
+import './assets/css/euda.auth.css'
+import './assets/css/euda.dashboard.css'
+import './assets/css/euda.contacts.css'
 
 // Layouts 
 import routes from './routes'

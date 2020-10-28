@@ -1,6 +1,6 @@
 import React from "react";
-import logo from "../../assets/assets/img/logo-saf.png";
-import bg from "../../assets/assets/img/cover.jpg";
+import logo from "../../assets/img/logo-saf.png";
+import bg from "../../assets/img/cover.jpg";
 import { Formik, ErrorMessage, Form } from "formik";
 import Alert  from "../../components/alerts/WarningAlert";
 import Footer from "../../components/footer/Footer";
