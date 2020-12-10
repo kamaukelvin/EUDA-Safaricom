@@ -13,6 +13,7 @@ const ContextProvider = (props) => {
 
   // Drawer
   const [visible, setVisible] = useState(false);
+  const [returnVisible, setReturnVisible] = useState(false);
 
   const showDrawer = () => {
     setVisible(true);
@@ -21,12 +22,19 @@ const ContextProvider = (props) => {
   const onClose = () => {
     setVisible(false);
   };
+  const showReturnDrawer = () => {
+    setReturnVisible(true);
+  };
+
+  const onReturnClose = () => {
+    setReturnVisible(false);
+  };
 
 
 
   return (
     <Context.Provider
-      value={{user, setUser,visible,showDrawer,onClose }}
+      value={{user, setUser,visible,showDrawer,onClose,returnVisible,showReturnDrawer,onReturnClose }}
     >
       {props.children}
     </Context.Provider>

@@ -5,13 +5,14 @@ import { UserOutlined, LaptopOutlined, CheckOutlined } from "@ant-design/icons";
 import EmployeeList from "../../components/tabs/employeesList";
 import { Scrollbars } from 'react-custom-scrollbars';
 import ReplaceDeviceDrawer from '../../components/drawers/replace_device'
+import ReturnDeviceDrawer from '../../components/drawers/return_device'
 import { IoIosSwap } from "react-icons/io"
 import { IoIosUndo } from "react-icons/io"
 import {Context} from '../../context/Context'
 
 const Employee = ({ accessories, showConfirm }) => {
   const { TabPane } = Tabs;
-  const {visible} = useContext(Context)
+  const {visible, returnVisible,showReturnDrawer} = useContext(Context)
 
   return (
     <div>
@@ -293,10 +294,10 @@ const Employee = ({ accessories, showConfirm }) => {
                                     Replace Device
                                   </span>
                                 </a>
-                               
+                                {returnVisible && <ReturnDeviceDrawer/>}
                                 <a
                                   href
-                                  onClick={() => showConfirm()}
+                                  onClick={() => showReturnDrawer()}
                                   className="btn btn-sm btn-success text-white"
                                   style={{fontSize:"12px"}}
                                 >
