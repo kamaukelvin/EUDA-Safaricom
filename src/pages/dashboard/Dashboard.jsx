@@ -134,7 +134,7 @@ const Dashboard = ({ collapsed, toggleSidebar }) => {
           </div>
           {/* row */}
         </div>
-        {/* container */}
+    
       </div>
     </div>
   );

@@ -1,7 +1,15 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import Employee from './Employee'
+import { Modal} from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import {Context} from '../../context/Context'
+
+
+const { confirm } = Modal
 
 const EmployeeWrapper = () => {
+
+  const {showDrawer} = useContext(Context)
 
     
     const accessories = [
@@ -18,10 +26,26 @@ const EmployeeWrapper = () => {
           title: 'Thinkpad Mouse (Wired)',
         },
       ];
+
+      const showConfirm=()=>{
+        confirm({
+          centered: true,
+          title: 'Are you sure you want to dispose this item?',
+          icon: <ExclamationCircleOutlined />,
+          content: 'Some descriptions',
+          onOk() {
+            showDrawer();
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+        });
+      }
     return (
         <div>
             <Employee 
             accessories={accessories}
+            showConfirm={showConfirm}
             />
         </div>
     )

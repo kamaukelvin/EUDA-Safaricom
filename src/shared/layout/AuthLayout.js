@@ -3,12 +3,12 @@ import routes from "../../routes";
 import { useHistory } from "react-router-dom";
 import { Layout } from "antd";
 import Sidebar from "../../components/sidebar/Sidebar";
-import Header from '../../components/header/Header'
+import TopBar from "../../components/header/Header";
 
 const AuthLayout = (props) => {
-    console.log("the props", props)
+  console.log("the props", props);
   const history = useHistory();
-  const {Content } = Layout;
+  const { Header, Footer, Sider, Content } = Layout;
 
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
@@ -19,26 +19,20 @@ const AuthLayout = (props) => {
     // Fetch data for logged in user using token
   });
   return (
-    <Layout>
-    <Sidebar  />
-    <Layout className="site-layout">
-      <div className="content ht-100v pd-0">
-       <Header/>
-        <Content
-          className="site-layout-background"
-          style={{
-            minHeight: 280,
-          }}
-        >
-            {props.children}
-            </Content>
-            </div>
-            </Layout>
-            </Layout>
-            
-      
-    
-
+    <>
+      <Layout>
+        <Sider style={{ background: "#fff" }}>
+          <Sidebar />
+        </Sider>
+        <Layout>
+          <Header style={{ padding: "0px" }}>
+            <TopBar />
+          </Header>
+          <Content>{props.children}</Content>
+          <Footer>Footer</Footer>
+        </Layout>
+      </Layout>
+    </>
   );
 };
 

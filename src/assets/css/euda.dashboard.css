@@ -1,9 +1,4 @@
-/*
- * Dashforge Dashboard Pages
- *
- * This style is use in dashboard pages.
- *
- */
+
 .bg-df-1 {
   background-color: #0168fa; }
 
@@ -381,3 +376,35 @@
       font-family: "Rubik", sans-serif; }
     .table-dashboard-two td:last-child {
       color: #8392a5; }
+
+
+/* OVERRIDES */
+
+
+.ant-layout-sider .ant-layout-sider-dark{
+  min-width: 250px !important;
+}
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
+  color:#39b54a !important
+}
+.ant-tabs-tab:hover{
+  color:#39b54a !important
+
+}
+.ant-input:focus, .ant-input-focused {
+  border: 1px solid #39b54a !important;
+  border-right-width: 1px !important;
+  outline: 0;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+.ant-input:hover {
+  border-color: #39b54a !important;
+}
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: #39b54a !important;}
+  
+  .ant-select-focused:not(.ant-select-disabled).ant-select-single:not(.ant-select-customize-input) .ant-select-selector{
+    -webkit-box-shadow: none !important; 
+    box-shadow: none !important;
+  }

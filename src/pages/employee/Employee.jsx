@@ -1,14 +1,17 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Tabs, List } from "antd";
 import * as Icon from "react-feather";
-import {
-  UserOutlined,
-  LaptopOutlined,
-  CheckOutlined,
-} from "@ant-design/icons";
+import { UserOutlined, LaptopOutlined, CheckOutlined } from "@ant-design/icons";
+import EmployeeList from "../../components/tabs/employeesList";
+import { Scrollbars } from 'react-custom-scrollbars';
+import ReplaceDeviceDrawer from '../../components/drawers/replace_device'
+import { IoIosSwap } from "react-icons/io"
+import { IoIosUndo } from "react-icons/io"
+import {Context} from '../../context/Context'
 
-const Employee = ({ accessories }) => {
+const Employee = ({ accessories, showConfirm }) => {
   const { TabPane } = Tabs;
+  const {visible} = useContext(Context)
 
   return (
     <div>
@@ -33,253 +36,10 @@ const Employee = ({ accessories }) => {
           </div>
 
           <div className="content ht-100v pd-0">
-            
             <div className="content-body pd-0">
               <div className="contact-wrapper contact-wrapper-two">
-                <div className="contact-navleft">
-                  <nav className="nav flex-column">
-                    <a
-                      href="#tabContact"
-                      className="nav-link active"
-                      data-toggle="tab"
-                    >
-                      <span
-                        data-toggle="tooltip"
-                        title="All Contacts"
-                        data-placement="right"
-                      >
-                        <Icon.Users />
-                      </span>
-                    </a>
-                    <a
-                      href="#tabPhoneCall"
-                      className="nav-link"
-                      data-toggle="tab"
-                    >
-                      <span
-                        data-toggle="tooltip"
-                        title="Recently Searched"
-                        data-placement="right"
-                      >
-                        <Icon.Clock />
-                      </span>
-                    </a>
-                    <a
-                      href="#tabFavorites"
-                      className="nav-link"
-                      data-toggle="tab"
-                    >
-                      <span
-                        data-toggle="tooltip"
-                        title="Favorites"
-                        data-placement="right"
-                      >
-                        <Icon.Star />
-                      </span>
-                    </a>
-                  </nav>
-                </div>
-                <div className="contact-sidebar">
-                  <div className="contact-sidebar-header">
-                    <div className="search-form">
-                      <input
-                        type="search"
-                        className="form-control"
-                        placeholder="Search Employee"
-                      />
-                    </div>
-                    <a href="#" className="btn btn-xs btn-icon btn-success">
-                      <span data-toggle="tooltip" title="Search an employee">
-                        <Icon.Search />
-                      </span>
-                    </a>
-                    {/* contact-add */}
-                  </div>
-                  {/* contact-sidebar-header */}
-                  <div className="contact-sidebar-body">
-                    <div className="tab-content">
-                      <div
-                        id="tabContact"
-                        className="tab-pane fade active show"
-                      >
-                        <div className="pd-y-20 pd-x-10 contact-list">
-                          <label id="contactA" className="contact-list-divider">
-                            A
-                          </label>
-                          <div className="media">
-                            <div className="avatar avatar-sm ">
-                              <span className="avatar-initial rounded-circle bg-gray-700">
-                                A
-                              </span>
-                            </div>
-                            <div className="media-body mg-l-10">
-                              <h6 className="tx-13 mg-b-3">Abigail Johnson</h6>
-                              <span className="tx-12">abigail@safaricom.com</span>
-                            </div>
-                            {/* media-body */}
-                          </div>
-                          {/* media */}
-                          <div className="media">
-                            <div className="avatar avatar-sm ">
-                              <img
-                                src="https://via.placeholder.com/500"
-                                className="rounded-circle"
-                                alt=""
-                              />
-                            </div>
-                            <div className="media-body mg-l-10">
-                              <h6 className="tx-13 mg-b-3">Archie Cantones</h6>
-                              <span className="tx-12">archie@safaricom.com</span>
-                            </div>
-                            {/* media-body */}
-                          </div>
-                          {/* media */}
-                          <div className="media">
-                            <div className="avatar avatar-sm ">
-                              <span className="avatar-initial rounded-circle bg-primary">
-                                a
-                              </span>
-                            </div>
-                            <div className="media-body mg-l-10">
-                              <h6 className="tx-13 mg-b-3">Allan Rey Palban</h6>
-                              <span className="tx-12">allanr@safaricom.com</span>
-                            </div>
-                            {/* media-body */}
-                          </div>
-                          {/* media */}
-                          <label id="contactB" className="contact-list-divider">
-                            B
-                          </label>
-                          <div className="media">
-                            <div className="avatar avatar-sm ">
-                              <img
-                                src="https://via.placeholder.com/500"
-                                className="rounded-circle"
-                                alt=""
-                              />
-                            </div>
-                            <div className="media-body mg-l-10">
-                              <h6 className="tx-13 mg-b-3">Bruno Kibuchi</h6>
-                              <span className="tx-12">bkibuchi@safaricom.com</span>
-                            </div>
-                            {/* media-body */}
-                          </div>
-                          {/* media */}
-                          <div className="media">
-                            <div className="avatar avatar-sm ">
-                              <span className="avatar-initial rounded-circle bg-indigo">
-                                B
-                              </span>
-                            </div>
-                            <div className="media-body mg-l-10">
-                              <h6 className="tx-13 mg-b-3">Brandibelle Yap</h6>
-                              <span className="tx-12">byap@safaricom.com</span>
-                            </div>
-                            {/* media-body */}
-                          </div>
-                          {/* media */}
-                          <div className="media">
-                            <div className="avatar avatar-sm ">
-                              <span className="avatar-initial rounded-circle bg-gray-800">
-                                B
-                              </span>
-                            </div>
-                            <div className="media-body mg-l-10">
-                              <h6 className="tx-13 mg-b-3">Brejette Bunggay</h6>
-                              <span className="tx-12">brej@safaricom.com</span>
-                            </div>
-                            {/* media-body */}
-                          </div>
-                          {/* media */}
-                        </div>
-                      </div>
-                      <div id="tabPhoneCall" className="tab-pane fade">
-                        <div className="pd-y-20 pd-x-10 contact-list">
-                          <label className="contact-list-divider">
-                            Recent Searches
-                          </label>
-                          <div className="media">
-                            <div className="avatar avatar-sm ">
-                              <img
-                                src="https://via.placeholder.com/500"
-                                className="rounded-circle"
-                                alt=""
-                              />
-                            </div>
-                            <div className="media-body mg-l-10">
-                              <h6 className="tx-13 mg-b-3">Camille Audrey</h6>
-                              <span className="tx-12">
-                                camille@safaricom.com
-                              </span>
-                            </div>
-                            {/* media-body */}
-                          </div>
-                          {/* media */}
-                          <div className="media">
-                            <div className="avatar avatar-sm avatar-offline">
-                              <span className="avatar-initial rounded-circle bg-success">
-                                E
-                              </span>
-                            </div>
-                            <div className="media-body mg-l-10">
-                              <h6 className="tx-13 mg-b-3">Elvis Vircede</h6>
-                              <span className="tx-12">elvis@safaricom.com</span>
-                            </div>
-                            {/* media-body */}
-                          </div>
-                          {/* media */}
-                        </div>
-                        {/* contact-list */}
-                      </div>
-                      {/* tab-pane */}
-                      <div id="tabFavorites" className="tab-pane fade">
-                        <div className="pd-y-20 pd-x-10 contact-list">
-                          <label className="contact-list-divider">
-                            My Favorites
-                          </label>
-                          <div className="media">
-                            <div className="avatar avatar-sm ">
-                              <img
-                                src="https://via.placeholder.com/500"
-                                className="rounded-circle"
-                                alt=""
-                              />
-                            </div>
-                            <div className="media-body mg-l-10">
-                              <h6 className="tx-13 mg-b-3">Archie Cantones</h6>
-                              <span className="tx-12">
-                                archie@safaricom.com
-                              </span>
-                            </div>
-                            {/* media-body */}
-                          </div>
-                          {/* media */}
-                          <div className="media">
-                            <div className="avatar avatar-sm ">
-                              <img
-                                src="https://via.placeholder.com/500"
-                                className="rounded-circle"
-                                alt=""
-                              />
-                            </div>
-                            <div className="media-body mg-l-10">
-                              <h6 className="tx-13 mg-b-3">Brenda Aceron</h6>
-                              <span className="tx-12">
-                                brenda@safaricom.com
-                              </span>
-                            </div>
-                            {/* media-body */}
-                          </div>
-                          {/* media */}
-                        </div>
-                      </div>
-                      {/* tab-pane */}
-                    </div>
-                    {/* tab-content */}
-                  </div>
-                  {/* contact-sidebar-body */}
-                </div>
-                {/* contact-sidebar */}
+                  <EmployeeList/>
+              
 
                 <div className="contact-content">
                   <Tabs defaultActiveKey="1">
@@ -300,10 +60,7 @@ const Employee = ({ accessories }) => {
                           >
                             <div className="d-flex align-items-center justify-content-between mg-b-25">
                               <h6 className="mg-b-0">
-                                <Icon.User
-                                  className=" mr-2"
-                                  size={17}
-                                />{" "}
+                                <Icon.User className=" mr-2" size={17} />{" "}
                                 Personal Details
                               </h6>
                               <div className="d-flex">
@@ -363,10 +120,7 @@ const Employee = ({ accessories }) => {
                             </div>
                             {/* row */}
                             <h6 className="mg-t-40 mg-b-20">
-                              <Icon.Phone
-                                className=" mr-2"
-                                size={17}
-                              />
+                              <Icon.Phone className=" mr-2" size={17} />
                               Contact Details
                             </h6>
                             <div className="row row-sm">
@@ -422,11 +176,13 @@ const Employee = ({ accessories }) => {
                       key="2"
                     >
                       <div className="contact-content-body">
+                      <Scrollbars style={{ width: "100%", height: "80%" }} autoHide autoHideTimeout={1000}>
                         <div className="tab-content">
                           <div
                             id="contactInformation"
                             className="tab-pane show active pd-20 pd-xl-25"
                           >
+                                  
                             <div className="d-flex align-items-center justify-content-between mg-b-25">
                               <h6 className="mg-b-0">
                                 <LaptopOutlined className="mr-2" /> Allocation
@@ -434,8 +190,7 @@ const Employee = ({ accessories }) => {
                               </h6>
                               <div className="d-flex">
                                 <a
-                                  href="#modalEditContact"
-                                  data-toggle="modal"
+                                  href
                                   className="btn btn-sm btn-white d-flex align-items-center mg-r-5"
                                 >
                                   <Icon.Edit2 size={14} />
@@ -499,6 +254,7 @@ const Employee = ({ accessories }) => {
                               </div>
                             </div>
                             {/* row */}
+                      
                             <h6 className="mg-t-40 mg-b-20">
                               {" "}
                               Accessories assigned to this device
@@ -522,9 +278,39 @@ const Employee = ({ accessories }) => {
                                 </List.Item>
                               )}
                             />
-                            ,
+                            <br/>
+                            <br/>
+                            {visible && <ReplaceDeviceDrawer/>}
+                                <a
+                                  href
+                                  onClick={() => showConfirm()}
+                                  className="btn btn-sm btn-success text-white mr-2"
+                                  style={{fontSize:"12px"}}
+                                >
+                                  <IoIosSwap size={3} />
+                                  <span className="d-none d-sm-inline mg-l-5">
+                                    {" "}
+                                    Replace Device
+                                  </span>
+                                </a>
+                               
+                                <a
+                                  href
+                                  onClick={() => showConfirm()}
+                                  className="btn btn-sm btn-success text-white"
+                                  style={{fontSize:"12px"}}
+                                >
+                                  <IoIosUndo size={14} />
+                                  <span className="d-none d-sm-inline mg-l-5">
+                                    {" "}
+                                    Return Device
+                                  </span>
+                                </a>
+                               
                           </div>
+                         
                         </div>
+                        </Scrollbars>
                         {/* tab-content */}
                       </div>
                       {/* contact-content-body */}
