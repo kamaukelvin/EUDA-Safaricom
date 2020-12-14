@@ -1,7 +1,7 @@
 import { handle_api_error } from "./errorHandler";
 import axios from "axios";
 
-let api_url = "https://api.nexus.ke/api/web/v1/serviceprovider";
+let api_url = "http://142.93.246.194:50/";
 
 
 
@@ -31,8 +31,20 @@ function login({ username, password }) {
           },
         },
       };
-      let response = await call_api(body, config);
+      let response = await get_api(body, config);
       sessionStorage.setItem("token", response.token)
+      return resolve(response);
+    } catch (err) {
+      return reject(err);
+    }
+  });
+}
+
+function fetch_employees() {
+  return new Promise(async function (resolve, reject) {
+    try {
+      let endpoint ="all_employees"
+      let response = await get_api(endpoint);
       return resolve(response);
     } catch (err) {
       return reject(err);
@@ -45,18 +57,20 @@ function login({ username, password }) {
 
 // base functions
 
-async function call_api(body, config) {
+async function get_api(endpoint) {
   return new Promise(async function (resolve, reject) {
     axios
-      .post(api_url, body, config)
+      .get(api_url + endpoint)
       .then(function (response) {
-        return resolve(response.data.result);
+        console.log("api is called", response.data)
+        return resolve(response.data);
+        
       })
       .catch(function (error) {
+        console.log("api is NOT called", error)
         if (error.response) {
-          if (error.response.status === 500) {
-            return reject(handle_api_error(error.response.data));
-          }
+            return (error.response.data);
+          
         } else {
           return reject(error);
         }
@@ -68,4 +82,5 @@ async function call_api(body, config) {
 
 export {
   login,
+  fetch_employees
 };

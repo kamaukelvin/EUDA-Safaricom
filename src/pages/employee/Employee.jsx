@@ -9,10 +9,11 @@ import ReturnDeviceDrawer from '../../components/drawers/return_device'
 import { IoIosSwap } from "react-icons/io"
 import { IoIosUndo } from "react-icons/io"
 import {Context} from '../../context/Context'
+import PageLoader from '../../components/loaders/pageLoader'
 
-const Employee = ({ accessories, showConfirm }) => {
+const Employee = ({ accessories, showConfirm}) => {
   const { TabPane } = Tabs;
-  const {visible, returnVisible,showReturnDrawer} = useContext(Context)
+  const {visible, returnVisible,showReturnDrawer, empList} = useContext(Context)
 
   return (
     <div>
@@ -35,11 +36,12 @@ const Employee = ({ accessories, showConfirm }) => {
               </h5>
             </div>
           </div>
+          {empList===undefined || empList.length===0  ? <PageLoader/>:
 
           <div className="content ht-100v pd-0">
             <div className="content-body pd-0">
               <div className="contact-wrapper contact-wrapper-two">
-                  <EmployeeList/>
+                  <EmployeeList />
               
 
                 <div className="contact-content">
@@ -297,7 +299,7 @@ const Employee = ({ accessories, showConfirm }) => {
                                 {returnVisible && <ReturnDeviceDrawer/>}
                                 <a
                                   href
-                                  onClick={() => showReturnDrawer()}
+                                  // onClick={() => showReturnDrawer()}
                                   className="btn btn-sm btn-success text-white"
                                   style={{fontSize:"12px"}}
                                 >
@@ -323,6 +325,7 @@ const Employee = ({ accessories, showConfirm }) => {
               {/* contact-wrapper */}
             </div>
           </div>
+}
           {/* content */}
         </div>
       </div>

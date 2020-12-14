@@ -29,7 +29,7 @@ const AuthLayout = (props) => {
             <TopBar />
           </Header>
           <Content>{props.children}</Content>
-          <Footer>Footer</Footer>
+         
         </Layout>
       </Layout>
     </>

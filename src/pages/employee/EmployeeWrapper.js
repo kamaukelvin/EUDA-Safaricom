@@ -1,15 +1,25 @@
-import React,{useContext} from 'react'
+import React,{useContext, useEffect} from 'react'
 import Employee from './Employee'
 import { Modal} from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import {Context} from '../../context/Context'
+import {api_srv} from '../../services'
 
 
 const { confirm } = Modal
 
 const EmployeeWrapper = () => {
 
-  const {showDrawer} = useContext(Context)
+  const {showDrawer,setEmpList} = useContext(Context)
+  useEffect(()=>{
+    fetchEmployees()
+},[])
+
+const fetchEmployees=async ()=>{
+  let response = await (await api_srv).fetch_employees()
+  setEmpList(response.recordsets)
+}
+
 
     
     const accessories = [
@@ -30,7 +40,7 @@ const EmployeeWrapper = () => {
       const showConfirm=()=>{
         confirm({
           centered: true,
-          title: 'Are you sure you want to dispose this item?',
+          title: 'Are you sure you want to replace this item?',
           icon: <ExclamationCircleOutlined />,
           content: 'Some descriptions',
           onOk() {
@@ -46,6 +56,7 @@ const EmployeeWrapper = () => {
             <Employee 
             accessories={accessories}
             showConfirm={showConfirm}
+           
             />
         </div>
     )

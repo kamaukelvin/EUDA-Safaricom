@@ -1,30 +1,88 @@
-import React from "react";
+import React,{useContext, useState} from "react";
 import { Tabs } from "antd";
 import * as Icon from "react-feather";
 import { Scrollbars } from 'react-custom-scrollbars';
+import {Context} from '../../../context/Context'
+
+
+
 
 const EmployeeList = () => {
-  let previousChar = "";
-  const empList = [
-    { name: "Kelvin", id: 1 },
-    { name: "Bruno", id: 2 },
-    { name: "Gaodlife", id: 3 },
-    { name: "Bbodlife", id: 4 },
-    { name: "Yfodlife", id: 5 },
-    { name: "Gcodlife", id: 6 },
-    { name: "Rvodlife", id: 7 },
-    { name: "Inodlife", id: 8 },
-    { name: "Pqodlife", id: 9 },
-    { name: "Aaodlife", id: 10 },
-    { name: "Mrodlife", id: 11 },
-    { name: "Lojdlife", id: 12 },
-    { name: "Rpodlife", id: 13 },
-    { name: "Yomdlife", id: 14 },
-  ];
+
+  const {empList} = useContext(Context)
+
+  const [keyword, setKeyword] = useState(null);
+
+const   [loading, setLoading] = useState(false) 
+const [hasMore, setHasMore] = useState(true)
+console.log("list here", empList)
+    
+const searchedKeyword = (event) => {
+  let searchText = event.target.value;
+  setKeyword(searchText);
+};
+
+  let data = empList[0].sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base' }))
+  .reduce((r, e) => {
+ 
+    // get first letter of name of current element
+    let alphabet = e.name[0];
+   
+    // if there is no property in accumulator with this letter create it
+    if (!r[alphabet]) r[alphabet] = { alphabet, record: [e] }
+   
+    // if there is push current element to children array for that letter
+    else r[alphabet].record.push(e);
+   
+    // return accumulator
+    return r;
+  }, {});
+   
+  let result = Object.values(data);
+
+  let results = result.filter((dat)=>{
+    if(keyword == null)return dat
+    else if(dat.record.map((check)=>{
+      console.log("KEYWORD IS NOT NUL")
+       check.name.toLowerCase().includes(keyword.toLowerCase())
+    }))
+      
+       {
+      return dat
+    }
+      
+  }).map((employee,index)=>{
+    return(
+      <div key={index} >
+      <label id="contactA" className="contact-list-divider">
+        {employee.alphabet}
+      </label>
+      {employee.record.map((emp)=>(
+             <div className="media" key={emp.id}>
+        
+             <div className="avatar avatar-sm ">
+               <span className="avatar-initial rounded-circle bg-gray-700">
+              {emp.name.charAt(0)}
+               </span>
+             </div>
+             <a href>
+             <div className="media-body mg-l-10">
+               <h6 className="tx-13 mg-b-3">{emp.name}</h6>
+               <span className="tx-12">{emp.username}</span>
+             </div>
+             </a>
+           
+           </div>
+      ))}
+ 
+      </div>
+    )
+    
+  })
 
   const { TabPane } = Tabs;
   return (
-    <Tabs tabPosition="left">
+    <Tabs tabPosition="left" >
       <TabPane tab={<Icon.Users size={18} />} key="1">
         <div className="contact-sidebar">
           <div className="contact-sidebar-header">
@@ -33,6 +91,7 @@ const EmployeeList = () => {
                 type="search"
                 className="form-control"
                 placeholder="Search Employee"
+                onChange={(e) => searchedKeyword(e)}
               />
             </div>
             <a href className="btn btn-xs btn-icon btn-success">
@@ -45,9 +104,17 @@ const EmployeeList = () => {
           <div className="contact-sidebar-body">
           <Scrollbars style={{ width: "100%", height: "80%" }} autoHide autoHideTimeout={1000}>
             <div className="pd-y-20 pd-x-10 contact-list">
-              {empList
-                .sort((a, b) => a.name.localeCompare(b.name))
+                {results}
+              {/* {empList[0]
+                .sort((a, b) => a.name.localeCompare(b.name,'es', { sensitivity: 'base' }))
+                .reduce((r,e)=>{
+                  let alphabet = e.name[0]
+                  if(!r[alphabet]) r[alphabet] ={alphabet, record:[e]}
+                  else r[alphabet].record.push(e)
+                  return r
+                },{})
                 .map((emp) => {
+                  console.log("emp is here", emp.name)
                   if (emp.name.charAt(0) !== previousChar) {
                     previousChar = emp.name.charAt(0);
                     return (
@@ -58,23 +125,23 @@ const EmployeeList = () => {
                         <div className="media">
                           <div className="avatar avatar-sm ">
                             <span className="avatar-initial rounded-circle bg-gray-700">
-                              A
+                           {emp.name.charAt(0)}
                             </span>
                           </div>
                           <a href>
                           <div className="media-body mg-l-10">
                             <h6 className="tx-13 mg-b-3">{emp.name}</h6>
-                            <span className="tx-12">abigail@safaricom.com</span>
+                            <span className="tx-12">{emp.username}</span>
                           </div>
                           </a>
-                          {/* media-body */}
+                        
                         </div>
                       </div>
                     );
                   } else {
                     return <div className="empName">{emp.Name}</div>;
                   }
-                })}
+                })} */}
             </div>
             </Scrollbars>
           </div>
