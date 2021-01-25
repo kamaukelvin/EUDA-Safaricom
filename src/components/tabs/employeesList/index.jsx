@@ -7,78 +7,116 @@ import {Context} from '../../../context/Context'
 
 
 
-const EmployeeList = () => {
-
-  const {empList} = useContext(Context)
+const EmployeeList = ({data, allocations}) => {
 
   const [keyword, setKeyword] = useState(null);
+  const {setEmployee,setActiveAllocations} = useContext(Context)
 
-const   [loading, setLoading] = useState(false) 
+// const   [loading, setLoading] = useState(false) 
 const [hasMore, setHasMore] = useState(true)
-console.log("list here", empList)
-    
+   
 const searchedKeyword = (event) => {
   let searchText = event.target.value;
   setKeyword(searchText);
 };
 
-  let data = empList[0].sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base' }))
-  .reduce((r, e) => {
- 
-    // get first letter of name of current element
-    let alphabet = e.name[0];
-   
-    // if there is no property in accumulator with this letter create it
-    if (!r[alphabet]) r[alphabet] = { alphabet, record: [e] }
-   
-    // if there is push current element to children array for that letter
-    else r[alphabet].record.push(e);
-   
-    // return accumulator
-    return r;
-  }, {});
-   
-  let result = Object.values(data);
-
-  let results = result.filter((dat)=>{
-    if(keyword == null)return dat
-    else if(dat.record.map((check)=>{
-      console.log("KEYWORD IS NOT NUL")
-       check.name.toLowerCase().includes(keyword.toLowerCase())
-    }))
-      
-       {
-      return dat
-    }
-      
-  }).map((employee,index)=>{
-    return(
-      <div key={index} >
-      <label id="contactA" className="contact-list-divider">
-        {employee.alphabet}
-      </label>
-      {employee.record.map((emp)=>(
-             <div className="media" key={emp.id}>
-        
-             <div className="avatar avatar-sm ">
-               <span className="avatar-initial rounded-circle bg-gray-700">
-              {emp.name.charAt(0)}
-               </span>
-             </div>
-             <a href>
-             <div className="media-body mg-l-10">
-               <h6 className="tx-13 mg-b-3">{emp.name}</h6>
-               <span className="tx-12">{emp.username}</span>
-             </div>
-             </a>
-           
-           </div>
-      ))}
- 
-      </div>
-    )
-    
+const get_active_allocation=(id)=>{
+  let filter = allocations.filter((allocation) => {
+    return allocation.user_id === id && allocation.status==="ongoing";
   })
+  setActiveAllocations(filter)
+}
+
+const get_employee_details=(id)=>{
+  let filter = data.filter((employee) => {
+    return employee.id===id
+  })
+  setEmployee(filter)
+}
+
+  // {()=>this.handleClick(project.id)}
+  //        { this.state.displayProject_id === project.id ?
+  //          <DisplaySingleItem project={project} /> : 
+  //           null
+  //        }
+
+  // let employees = data[0].sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base' }))
+  // .reduce((r, e) => {
+ 
+  //   // get first letter of name of current element
+  //   let alphabet = e.name[0];
+   
+  //   // if there is no property in accumulator with this letter create it
+  //   if (!r[alphabet]) r[alphabet] = { alphabet, record: [e] }
+   
+  //   // if there is push current element to children array for that letter
+  //   else r[alphabet].record.push(e);
+   
+  //   // return accumulator
+  //   return r;
+  // }, {});
+   
+  // let result = Object.values(employees);
+
+  // let results = result.filter((dat)=>{
+  //   if(keyword == null)return dat
+  //   else if(dat.record.map((check)=>{
+  //     console.log("KEYWORD IS NOT NUL")
+  //      check.name.toLowerCase().includes(keyword.toLowerCase())
+  //   }))
+      
+  //      {
+  //     return dat
+  //   }
+      
+  // })
+  // let results = 
+  // data.map((employee,index)=>{
+  //   return(
+  //     <div key={index} >
+  //     <label id="contactA" className="contact-list-divider">
+  //       {employee.alphabet}
+  //     </label>
+  //     {
+  //     data.map((emp)=>(
+  //            <div className="media" key={emp.id}>
+        
+  //            <div className="avatar avatar-sm ">
+  //              <span className="avatar-initial rounded-circle bg-gray-700">
+  //             {emp.name.charAt(0)}
+  //              </span>
+  //            </div>
+  //            <a href>
+  //            <div className="media-body mg-l-10">
+  //              <h6 className="tx-13 mg-b-3">{emp.name}</h6>
+  //              <span className="tx-12">{emp.username}</span>
+  //            </div>
+  //            </a>
+           
+  //          </div>
+  //     ))}
+ 
+  //     </div>
+  //   )
+    
+  // })
+  let results = data.map((emp)=>(
+    <div className="media" key={emp.id}>
+
+    <div className="avatar avatar-sm ">
+      <span className="avatar-initial rounded-circle bg-gray-700">
+     {emp.name.charAt(0)}
+      </span>
+    </div>
+    <a href onClick={()=>{get_active_allocation(emp.id);get_employee_details(emp.id)}}>
+    <div className="media-body mg-l-10">
+      <h6 className="tx-13 mg-b-3">{emp.name}</h6>
+      <span className="tx-12">{emp.username}</span>
+    </div>
+    </a>
+  
+  </div>
+))
 
   const { TabPane } = Tabs;
   return (

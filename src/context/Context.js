@@ -15,9 +15,8 @@ const ContextProvider = (props) => {
   const [visible, setVisible] = useState(false);
   const [returnVisible, setReturnVisible] = useState(false);
 
-  // all employees 
-
-  const [empList, setEmpList] = useState([])
+const [employee, setEmployee] = useState([])
+const [activeAllocations, setActiveAllocations] = useState([])
 
   const showDrawer = () => {
     setVisible(true);
@@ -47,8 +46,10 @@ const ContextProvider = (props) => {
         returnVisible,
         showReturnDrawer,
         onReturnClose,
-        empList,
-        setEmpList,
+        employee, 
+        setEmployee,
+        activeAllocations, 
+        setActiveAllocations
       }}
     >
       {props.children}
