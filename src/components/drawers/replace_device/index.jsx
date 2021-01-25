@@ -11,11 +11,11 @@ const ReplaceDevice = () => {
 
     return (
         <Drawer
-        title="Replacement Device"
+        title="Replace Device"
         placement="right"
         maskClosable={false}
         closable={true}
-        width={450}
+        width={600}
         onClose={onClose}
         visible={visible}
       >

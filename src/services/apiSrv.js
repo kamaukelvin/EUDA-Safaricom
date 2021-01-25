@@ -56,6 +56,17 @@ function fetch_device_allocations() {
     }
   });
 }
+function fetch_all_devices() {
+  return new Promise(async function (resolve, reject) {
+    try {
+      let endpoint ="getAllDevices"
+      let response = await get_api(endpoint);
+      return resolve(response);
+    } catch (err) {
+      return reject(err);
+    }
+  });
+}
 
 
 
@@ -88,5 +99,6 @@ async function get_api(endpoint) {
 export {
   login,
   fetch_employees,
-  fetch_device_allocations
+  fetch_device_allocations,
+  fetch_all_devices
 };

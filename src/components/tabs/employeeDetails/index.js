@@ -33,11 +33,11 @@ const accessories = [
   const showConfirm = () => {
     confirm({
       centered: true,
-      title: "Are you sure you want to replace this item?",
+      title: "Are you sure you want to return this device?",
       icon: <ExclamationCircleOutlined />,
-      content: "Some descriptions",
+      // content: "Some descriptions",
       onOk() {
-        showDrawer();
+        alert("api to set allocation to available");
       },
       onCancel() {
         console.log("Cancel");
@@ -299,7 +299,7 @@ const accessories = [
                         {visible && <ReplaceDeviceDrawer/>}
                             <a
                               href
-                              onClick={() => showConfirm()}
+                              onClick={() => showDrawer()}
                               className="btn btn-sm btn-success text-white mr-2"
                               style={{fontSize:"12px"}}
                             >
@@ -312,7 +312,7 @@ const accessories = [
                             {returnVisible && <ReturnDeviceDrawer/>}
                             <a
                               href
-                              // onClick={() => showReturnDrawer()}
+                              onClick={() => showConfirm()}
                               className="btn btn-sm btn-success text-white"
                               style={{fontSize:"12px"}}
                             >

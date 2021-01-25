@@ -1,9 +1,8 @@
 import React from 'react'
 import {Spin} from 'antd'
-import { AiOutlineLoading3Quarters } from "react-icons/ai"
 import { LoadingOutlined } from '@ant-design/icons'
 
-const PageLoader = () => {
+const PageLoader = ({description}) => {
 
     const antIcon = <LoadingOutlined style={{ fontSize: 36, color: '#39b54a'}} spin   />
     return (
@@ -12,7 +11,7 @@ const PageLoader = () => {
         <Spin indicator={antIcon} />
             
         </div>
-        <p className="text-center">Loading all employees Please wait...</p>
+        <p className="text-center">{description}</p>
         </div>
     )
 }

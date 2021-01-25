@@ -2,6 +2,9 @@ import React, {useContext} from 'react'
 import { Form, Input, Button, Select, Modal } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import {Context} from '../../../context/Context'
+import {useQuery} from 'react-query'
+import {api_srv} from '../../../services'
+import PageLoader from '../../../components/loaders/pageLoader/'
 
 const {confirm} = Modal
   const tailLayout = {
@@ -10,10 +13,18 @@ const {confirm} = Modal
       span: 16,
     },
   }
+  const fetchDevices = async () => {
+    let response = await (await api_srv).fetch_all_devices();
+    return response;
+  };
+
+ 
+
 
 const ReplaceDevice = () => {
+  const {isLoading, isSuccess, data} = useQuery("devices",fetchDevices )
 
-    const {onClose}= useContext(Context)
+const {onClose}= useContext(Context)
     const onFinish = values => {
         if(values.purchase==="yes"){
             confirm({
@@ -40,12 +51,12 @@ const ReplaceDevice = () => {
         console.log('Failed:', errorInfo);
       };
     return (
+      <div>
+      {isLoading && <PageLoader description="Please wait..." /> }
+      {isSuccess &&
         <Form
         layout="vertical"
       name="replace_device"
-      initialValues={{
-        remember: true,
-      }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
@@ -61,7 +72,13 @@ const ReplaceDevice = () => {
       
       >
           <Select>
-            <Select.Option value="demo">Demo</Select.Option>
+            {data.filter((device)=>{
+   return device.device_availability==="yes"
+  }).map((option)=>{
+    return(
+    <Select.Option value={option.serial_number}>{option.device_model} Serial Number-{option.serial_number}</Select.Option>)
+})}
+          
           </Select>
         </Form.Item>
       <Form.Item
@@ -123,7 +140,7 @@ const ReplaceDevice = () => {
          rules={[
            {
              required: true,
-             message: 'Please select whether to purchase or not!',
+             message: 'Please select whether to purchase the previous machine you wish to replace!',
            },
          ]}
       
@@ -139,7 +156,9 @@ const ReplaceDevice = () => {
         </Button>
       </Form.Item>
     </Form>
-    )
+}
+    
+    </div>)
 }
 
 export default ReplaceDevice

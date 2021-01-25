@@ -34,7 +34,7 @@ const EmployeeWrapper = () => {
 console.log("THE ERROR", isError, isErrorAllocations)
   return (
     <div>
-      {isLoading && isLoadingAllocations && <PageLoader />}
+      {isLoading && isLoadingAllocations && <PageLoader description="Loading all employees Please wait..." />}
       {isError && isErrorAllocations && <Error/> }
       {isSuccess && isSuccessAllocations && (
         <Employee
