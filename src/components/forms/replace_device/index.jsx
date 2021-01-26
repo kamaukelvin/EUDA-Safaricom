@@ -6,6 +6,7 @@ import {useQuery} from 'react-query'
 import {api_srv} from '../../../services'
 import PageLoader from '../../../components/loaders/pageLoader/'
 
+
 const {confirm} = Modal
   const tailLayout = {
     wrapperCol: {
@@ -117,7 +118,10 @@ const {onClose}= useContext(Context)
       
       >
           <Select>
-            <Select.Option value="demo">New Employee</Select.Option>
+            <Select.Option value="new employee">New Employee</Select.Option>
+            <Select.Option value="temporary employee">Temporary Employee</Select.Option>
+            <Select.Option value="contractor">Contractor</Select.Option>
+            <Select.Option value="replacement">Replacement</Select.Option>
           </Select>
         </Form.Item>
       <Form.Item 

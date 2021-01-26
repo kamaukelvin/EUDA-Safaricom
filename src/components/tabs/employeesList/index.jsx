@@ -22,9 +22,11 @@ const searchedKeyword = (event) => {
 
 const get_active_allocation=(id)=>{
   let filter = allocations.filter((allocation) => {
+    
     return allocation.user_id === id && allocation.status==="ongoing";
   })
   setActiveAllocations(filter)
+  console.log("individual allocation",filter)
 }
 
 const get_employee_details=(id)=>{

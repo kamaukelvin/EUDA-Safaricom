@@ -6,8 +6,9 @@ import { IoIosSwap } from "react-icons/io"
 import { IoIosUndo } from "react-icons/io"
 import {Context} from '../../../context/Context'
 import { UserOutlined, LaptopOutlined, CheckOutlined,ExclamationCircleOutlined } from "@ant-design/icons";
-import { Tabs, List, Empty, Modal } from "antd";
+import { Tabs, List, Empty, Modal, notification } from "antd";
 import * as Icon from "react-feather";
+import {api_srv} from '../../../services'
 
 const EmployeeDetails = () => {
 
@@ -30,20 +31,45 @@ const accessories = [
     },
   ];
 
-  const showConfirm = () => {
+  const openNotificationWithIcon = (type, description) => {
+    notification[type]({
+      message:description,
+      placement:'bottomRight'
+    });
+  };
+
+  const replace =async (device_id)=>{
+    console.log("the second props", device_id)
+    try{
+      let resp = await (await api_srv).return_device(device_id)
+      openNotificationWithIcon('success', 'Device replaced successfully')
+      console.log("the response of replace", resp)
+
+    }catch(err){
+      let error = await err
+      openNotificationWithIcon('error', 'Error replacing the device')
+      console.log("the error", error)
+    }
+
+  }
+
+  const showConfirm = (device_id) => {
+    console.log("the props", device_id)
     confirm({
       centered: true,
       title: "Are you sure you want to return this device?",
       icon: <ExclamationCircleOutlined />,
       // content: "Some descriptions",
       onOk() {
-        alert("api to set allocation to available");
+        replace(device_id)
       },
       onCancel() {
         console.log("Cancel");
       },
     });
   };
+
+
     return (
         <Tabs defaultActiveKey="1">
         <TabPane
@@ -189,7 +215,6 @@ const accessories = [
           <div className="contact-content-body">
               {activeAllocations.length===0? <Empty description="No allocations assigned"/>:
               activeAllocations.map((allocation,i)=>{
-              console.log("THE ALLOCATION", allocation)
                 if (i===0){
                     return (
                     <Scrollbars style={{ width: "100%", height: "80%" }} autoHide autoHideTimeout={1000}>
@@ -312,7 +337,7 @@ const accessories = [
                             {returnVisible && <ReturnDeviceDrawer/>}
                             <a
                               href
-                              onClick={() => showConfirm()}
+                              onClick={() => showConfirm(allocation.device_id)}
                               className="btn btn-sm btn-success text-white"
                               style={{fontSize:"12px"}}
                             >

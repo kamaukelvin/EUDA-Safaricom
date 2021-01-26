@@ -11,13 +11,11 @@ const EmployeeWrapper = () => {
 
   const fetchEmployees = async () => {
     let response = await (await api_srv).fetch_employees();
-    console.log("EMPLOYEE RESPONSE", response);
     return response;
   };
 
   const fetchAllocations = async () => {
     let response = await (await api_srv).fetch_device_allocations();
-    console.log("ALLOCATIONS", response);
     return response;
   };
 

@@ -33,6 +33,27 @@ function login({ username, password }) {
   });
 }
 
+function return_device(device_id) {
+  return new Promise(async function (resolve, reject) {
+    try {
+    
+      
+      let endpoint = "updateAllocationStatus"
+      const body = {
+        
+          "device_id": `${device_id}`,
+          "status": "terminated"
+      
+      };
+      console.log("the body of replace",body)
+      let response = await put_api(endpoint,body);
+      return resolve(response);
+    } catch (err) {
+      return reject(err);
+    }
+  });
+}
+
 function fetch_employees() {
   return new Promise(async function (resolve, reject) {
     try {
@@ -71,6 +92,8 @@ function fetch_all_devices() {
 
 
 
+
+
 // base functions
 
 async function get_api(endpoint) {
@@ -94,11 +117,33 @@ async function get_api(endpoint) {
   });
 }
 
+async function put_api(endpoint, body) {
+  return new Promise(async function (resolve, reject) {
+    axios
+      .put(api_url + endpoint, body)
+      .then(function (response) {
+        return resolve(response.data);
+        
+      })
+      .catch(function (error) {
+        console.log("THE API put ERROR", error)
+        if (error.response) {
+          if (error.response.status === 500) {
+            return reject(handle_api_error(error.response.data));
+          }
+        } else {
+          return reject(error);
+        }
+      });
+  });
+}
+
 
 
 export {
   login,
   fetch_employees,
   fetch_device_allocations,
-  fetch_all_devices
+  fetch_all_devices,
+  return_device
 };
