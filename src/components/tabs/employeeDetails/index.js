@@ -321,7 +321,10 @@ const accessories = [
                         />
                         <br/>
                         <br/>
-                        {visible && <ReplaceDeviceDrawer/>}
+                        {visible && <ReplaceDeviceDrawer
+                        asset_tag={allocation.dns_name}
+                        ticket={allocation.ref_ticket}
+                        />}
                             <a
                               href
                               onClick={() => showDrawer()}

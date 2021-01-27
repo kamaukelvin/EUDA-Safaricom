@@ -89,7 +89,34 @@ function fetch_all_devices() {
   });
 }
 
-
+function post_device(  
+  transaction_code,
+  ticket,
+  employee,
+  asset_tag) {
+  return new Promise(async function (resolve, reject) {
+    try {
+    
+      
+      let endpoint = "addNewEpr"
+      const body = {
+          "transaction_code": transaction_code,
+          "request_number": ticket,
+          "requestor_username": employee.map((detail)=>detail.username).toString(),
+          "facilitator_username": "test",
+          "asset_type_lookup": "LAPTOP",
+          "asset_tag": asset_tag,
+          "asset_serial": "123456",
+          "export_flag": "E"
+      };
+      console.log("the body of post to erp table",body)
+      let response = await post_api(endpoint,body);
+      return resolve(response);
+    } catch (err) {
+      return reject(err);
+    }
+  });
+}
 
 
 
@@ -138,6 +165,27 @@ async function put_api(endpoint, body) {
   });
 }
 
+async function post_api(endpoint, body) {
+  return new Promise(async function (resolve, reject) {
+    axios
+      .post(api_url + endpoint, body)
+      .then(function (response) {
+        return resolve(response.data);
+        
+      })
+      .catch(function (error) {
+        console.log("THE API post ERROR", error)
+        if (error.response) {
+          if (error.response.status === 500) {
+            return reject(handle_api_error(error.response.data));
+          }
+        } else {
+          return reject(error);
+        }
+      });
+  });
+}
+
 
 
 export {
@@ -145,5 +193,6 @@ export {
   fetch_employees,
   fetch_device_allocations,
   fetch_all_devices,
-  return_device
+  return_device,
+  post_device
 };

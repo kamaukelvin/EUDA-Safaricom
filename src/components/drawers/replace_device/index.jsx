@@ -4,7 +4,7 @@ import {Context} from '../../../context/Context'
 import ReplaceDeviceForm from '../../forms/replace_device'
 
 
-const ReplaceDevice = () => {
+const ReplaceDevice = ({asset_tag,ticket }) => {
 
     const {onClose, visible} = useContext(Context)
 
@@ -19,7 +19,10 @@ const ReplaceDevice = () => {
         onClose={onClose}
         visible={visible}
       >
-       <ReplaceDeviceForm/>
+       <ReplaceDeviceForm
+       asset_tag={asset_tag}
+       ticket={ticket}
+       />
       </Drawer>
     )
 }

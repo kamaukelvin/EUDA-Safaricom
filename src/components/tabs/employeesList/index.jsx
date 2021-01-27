@@ -8,6 +8,7 @@ import {Context} from '../../../context/Context'
 
 
 const EmployeeList = ({data, allocations}) => {
+  console.log("THE ALLOCATIONS", allocations)
 
   const [keyword, setKeyword] = useState(null);
   const {setEmployee,setActiveAllocations} = useContext(Context)
