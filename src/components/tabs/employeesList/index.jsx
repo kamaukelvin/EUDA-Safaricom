@@ -103,9 +103,21 @@ const get_employee_details=(id)=>{
   //   )
     
   // })
-  let results = data.map((emp)=>(
-    <div className="media" key={emp.id}>
 
+
+  let results = data.filter((data) => {
+    if (keyword == null) return data;
+    else if (
+      data.name.toLowerCase().includes(keyword.toLowerCase()) ||
+      data.username
+        .toLowerCase()
+        .includes(keyword.toLowerCase())
+      // data.quoation_amount.includes(search.toLowerCase())
+    ) {
+      return data;
+    }
+  }).map((emp)=>(
+    <div className="media" key={emp.id}>
     <div className="avatar avatar-sm ">
       <span className="avatar-initial rounded-circle bg-gray-700">
      {emp.name.charAt(0)}
